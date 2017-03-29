@@ -48,10 +48,19 @@ d.run(function () {
 	var config = Config.init(app);
 	mail.init(config);
 	app.use('/', express.static(path.join(__dirname, config.PUBLIC_PATH)));
+	app.use('/images', express.static(path.join(__dirname, 'files/images')));
+	app.use('/images/logos', express.static(path.join(__dirname, 'files/images/logos')));
+	app.use('/reports', express.static(path.join(__dirname, 'files/reports')));
+	app.use('/components', express.static(path.join(__dirname, 'public/libraries')));
+	app.use('/css', express.static(path.join(__dirname, 'public/css')));
+	app.use('/fonts', express.static(path.join(__dirname, 'public/fonts')));
 	//Configuracion db
 	app.db = require('monk')(config.DB_URL);
 	//WebAPI
 	require('./api/ws/list')('/api/list', app, secret, config);
+	require('./api/ws/role')('/api/role', app, secret, config);
+	require('./api/ws/option')('/api/option', app, secret, config);
+	require('./api/ws/roleOptions')('/api/roleoptions', app, secret, config);
 	require('./api/ws/user')('/api/user', app, secret, config);
 	//Inicializando Server
 	http.createServer(app).listen(config.APP_PORT, function () {

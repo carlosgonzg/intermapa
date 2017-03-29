@@ -1,64 +1,24 @@
 'use strict';
 
 var q = require('q');
-var util = require('./util');
-var Crud = require('./crud');
 
 function List(db) {
 	//Listados
 	this.phoneType = [{
 		_id: 1,
-		description: 'Home'
+		description: 'Casa'
 	},{
 		_id: 2,
-		description: 'Mobile'
+		description: 'Móvil'
 	},{
 		_id: 3,
-		description: 'Work'
+		description: 'Oficina'
 	},{
 		_id: 4,
-		description: 'Other'
+		description: 'Otro'
 	}
 	];
-	this.status = [
-		{
-			_id: 1,
-			description: 'Pending'
-		},{
-			_id: 2,
-			description: 'In Progress'
-		},{
-			_id: 3,
-			description: 'Completed'
-		},{
-			_id: 4,
-			description: 'Paid'
-		},{
-			_id: 5,
-			description: 'Cancelled'
-		},{
-			_id: 6,
-			description: 'Scheduled'
-		},{
-			_id: 7,
-			description: 'Completed Under Warranty'
-		}
-	];
-	this.search = [
-		{
-			code: 'MobileOne',
-			description: 'MobileOne'
-		},{
-			code: 'User',
-			description: 'Customer'
-		},{
-			code: 'Company',
-			description: 'Company'
-		},{
-			code: 'Branch',
-			description: 'Branch'
-		}
-	];
+
 };
 
 List.prototype.getList = function(list){

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Intermapa</title>
+		<link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css"/>
+		<link rel="stylesheet" type="text/css" href="components/angular-bootstrap/ui-bootstrap-csp.css"/>
+		<link rel="stylesheet" type="text/css" href="components/angular-dialog-service/dist/dialogs.min.css"/>
+		<link rel="stylesheet" type="text/css" href="components/angularjs-toaster/toaster.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/newsfeed.css"/>
+		<link rel="icon" href="./favicon.ico">
+	</head>
+	<body ng-app="IntermapaApp">
+		<header class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+				        <i class="fa fa-bars"></i>
+		      		</button>
+			      	<a class="navbar-brand" href="#/">
+			      		<i>Intermapa - Intercultura República Dominicana</i>
+		      		</a>
+				</div>
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="nav navbar-nav menu">
+						<li class="active"><a href=""> Inicio </a></li>
+						<li><a href=""> Mis Eventos </a></li>
+						<li><a href=""> Mis Cuestionarios </a></li>
+						<li><a href=""> F.A.Q. </a></li>
+						<li><a href=""> Contáctanos</a></li>
+						<li><a href=""> Entrar</a></li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		<toaster-container></toaster-container>
+		<!--<div ng-controller="SessionCtrl"></div>-->
+		<!-- Aqui poner el contenido -->
+		<div class="main_container container-fluid" ng-view=""></div>	
+		<footer>
+			<p>Designed and developed by Carlos González</p> 
+		</footer>
+		<!-- not angular -->
+		<script src="components/jquery/dist/jquery.min.js"></script>
+		<script src="components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+		<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="components/moment/moment.js"></script>
+		<!--angular -->
+		<script src="components/angular/angular.min.js"></script>
+		<script src="components/angular-animate/angular-animate.min.js"></script>
+		<script src="components/angular-aria/angular-aria.min.js"></script>
+		<script src="components/angular-bootstrap/ui-bootstrap.min.js"></script>
+		<script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+		<script src="components/angular-cookies/angular-cookies.min.js"></script>
+		<script src="components/angular-dialog-service/dist/dialogs.min.js"></script>
+		<script src="components/angular-messages/angular-messages.min.js"></script>
+		<script src="components/angular-resource/angular-resource.min.js"></script>
+		<script src="components/angular-route/angular-route.min.js"></script>
+		<script src="components/angular-sanitize/angular-sanitize.min.js"></script>
+		<script src="components/angular-touch/angular-touch.min.js"></script>
+		<script src="components/angular-touch/angular-touch.min.js"></script>
+		<script src="components/angular-translate/angular-translate.min.js"></script>
+		<script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="components/angularjs-toaster/toaster.min.js"></script>
+		<script src="components/tg-angular-validator/dist/angular-validator.min.js"></script>
+		<!-- src -->
+		<script src="app.js"></script>
+		<script src="modules/newsfeed/controllers/newsfeed.js"></script>
+	</body>
+</html>

@@ -10,14 +10,11 @@ var RoleOptions = require('./roleOptions');
 var Address = require('./address');
 var Phone = require('./phone');
 var jwt = require('jsonwebtoken');
-var _ = require('underscore');
+var _ = require('lodash');
 var md5 = require('md5')
 
 function User(db, secret, userLogged) {
 	this.crud = new Crud(db, 'USER', userLogged );
-	this.crudSO = new Crud(db, 'SERVICEORDER', userLogged );
-	this.crudWO = new Crud(db, 'WORKORDER', userLogged );
-	this.crudInv = new Crud(db, 'INVOICE', userLogged );
 	this.secret = secret;
 	//DB Table Schema
 	var accountSchema = {
@@ -265,7 +262,6 @@ User.prototype.login = function (email, password) {
 			return user;
 		})
 		.then(function (obj) {
-			console.log('1')
 			var token = jwt.sign(_this.getMiniUser(obj), _this.secret, {
 					expiresInMinutes : 60 * 3
 				});
@@ -342,11 +338,6 @@ User.prototype.getAdminUsers = function(getPono){
 		$and:[
 			{
 				'role._id': 1
-			},
-			{
-				$or: [{
-					sendEmail: true
-				}]
 			}
 		]
 	};
@@ -372,23 +363,15 @@ User.prototype.getAdminUsers = function(getPono){
 User.prototype.update = function(query, user, userLogged){
 	var d = q.defer();
 	var _this = this;
-	var obj = {};
 	_this.crud.update(query, user)
 	.then(function(result){
 		return _this.crud.find({ '_id': user._id });
 	})
 	.then(function(result){
-		obj = result.data[0];
-		return _this.crudSO.update({ 'client._id': obj._id }, { client: obj });
+		return result.data[0];
 	})
 	.then(function(result){
-		return _this.crudWO.update({ 'client._id': obj._id }, { client: obj });
-	})
-	.then(function(result){
-		return _this.crudInv.update({ 'client._id': obj._id }, { client: obj });
-	})
-	.then(function(result){
-		d.resolve(obj);
+		d.resolve(result);
 	})
 	.catch(function(err){
 		console.log(err)

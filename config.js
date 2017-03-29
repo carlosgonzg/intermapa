@@ -1,7 +1,7 @@
 var config = {
 	development : {
-		APP_PORT : process.env.PORT || 8081,
-		DB_URL: 'localhost:27017/heroku_cqkmxzc1',
+		APP_PORT : process.env.PORT || 7000,
+		DB_URL: 'localhost:27017/intermapa',
 		SERVER_URL: 'http://localhost:8080',
 		MAIL_USR: 'info@mobileonecontainers.com',
 		MAIL_PASS: '*info1234',

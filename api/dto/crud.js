@@ -1,10 +1,9 @@
 'use strict';
 
-var q = require('q'),
-util = require('./util'),
-Excel = require('./excel'),
-Validator = require('jsonschema').Validator,
-math = require('sinful-math');
+var q = require('q');
+var util = require('./util');
+var Excel = require('./excel');
+var Validator = require('jsonschema').Validator;
 var moment = require('moment')
 //Constructor
 function Crud(db, table, userLogged, filterByUser) {
