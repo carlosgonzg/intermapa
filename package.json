@@ -10,22 +10,15 @@
     "express": "^4.13.1",
     "express-jwt": "^3.0.1",
     "express-validator": "^2.13.0",
-    "html-pdf": "^2.1.0",
-    "jlinq": "^1.0.0",
     "jsonschema": "^1.0.2",
     "jsonwebtoken": "^5.7.0",
     "lodash": "^3.10.1",
-    "md5": "^2.2.1",
     "moment": "^2.15.1",
     "monk": "^3.1.1",
     "nodemailer": "^1.4.0",
-    "nodemon": "^1.11.0",
     "numeral": "^1.5.3",
     "q": "^1.4.1",
-    "request": "^2.60.0",
-    "sc-authorization": "^1.0.1",
-    "sinful-math": "0.0.1",
-    "underscore": "^1.8.3"
+    "request": "^2.60.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

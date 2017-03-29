@@ -51,6 +51,7 @@ d.run(function () {
 	//Configuracion db
 	app.db = require('monk')(config.DB_URL);
 	//WebAPI
+	require('./api/ws/list')('/api/list', app, secret, config);
 	require('./api/ws/user')('/api/user', app, secret, config);
 	//Inicializando Server
 	http.createServer(app).listen(config.APP_PORT, function () {
