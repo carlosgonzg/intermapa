@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h1 class="pull-left">
+			<i class="fa fa-lg fa-user"></i> <span> Evento</span>
+		</h1>
+		<div class="btn-group pull-right" style="margin-top: 20px;" role="group" aria-label="...">
+			<button type="submit" form="userForm" class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>&nbsp;<span>Guardar</span></button>
+			<back-button></back-button>
+		</div>
+		<hr />
+	</div>
+</div>
+<div class="col-xs-12 col-md-6">
+	<form class="form" id="userForm" name="userForm">
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="description">Título</label>
+				<textarea class="textarea form-control" ng-model="event.title" id="description"></textarea>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="date">Fecha del Evento</label>
+				<sc-datepicker ng-model="event.date"></sc-datepicker>
+			</div>
+		</div>
+	</form>
+</div>

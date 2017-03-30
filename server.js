@@ -62,6 +62,10 @@ d.run(function () {
 	require('./api/ws/option')('/api/option', app, secret, config);
 	require('./api/ws/roleOptions')('/api/roleoptions', app, secret, config);
 	require('./api/ws/user')('/api/user', app, secret, config);
+	require('./api/ws/event')('/api/event', app, secret, config);
+	require('./api/ws/news')('/api/news', app, secret, config);
+	require('./api/ws/form')('/api/form', app, secret, config);
+	require('./api/ws/response')('/api/response', app, secret, config);
 	//Inicializando Server
 	http.createServer(app).listen(config.APP_PORT, function () {
 		console.log("\n[*] Server Listening on port %d", config.APP_PORT);

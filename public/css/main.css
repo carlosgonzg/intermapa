@@ -305,12 +305,12 @@ header{
 	color: #fff;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
 	.right-content{
 		border-left: 2px solid gray;
 	}	
 }
-@media(max-width: 992px){
+@media(max-width: 768px){
 	.navbar-brand > i{
 		font-size: 14px;
 	}

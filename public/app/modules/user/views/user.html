@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-xs-12">
 		<h1 class="pull-left">
-			<i class="fa fa-lg fa-user"></i> <span> User</span>
+			<i class="fa fa-lg fa-user"></i> <span> Usuario</span>
 		</h1>
 		<div class="btn-group pull-right" style="margin-top: 20px;" role="group" aria-label="...">
-			<button type="submit" form="userForm" class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>&nbsp;<span>Save</span></button>
+			<button type="submit" form="userForm" class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>&nbsp;<span>Guardar</span></button>
 			<back-button></back-button>
 		</div>
 		<hr />
@@ -14,14 +14,20 @@
 	<form class="form" id="userForm" name="userForm">
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-				<label for="firstName">First Name</label>
+				<label for="firstName">Nombre</label>
 				<input type="text" class="form-control" ng-model="user.entity.firstName" id="firstName" placeholder="First Name">
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-				<label for="lastName">Last Name</label>
+				<label for="lastName">Apellido</label>
 				<input type="text" class="form-control" ng-model="user.entity.lastName" id="lastName" placeholder="Last Name">
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="birthday">Fecha de Nacimiento</label>
+				<sc-datepicker ng-model="user.entity.birthday"></sc-datepicker>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
@@ -32,36 +38,69 @@
 		</div>
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-				<label for="url">URL / Website</label>
-				<input type="url" class="form-control" ng-model="user.entity.url" id="url" placeholder="URL / Website">
+				<label for="phone">Teléfono</label>
+				<input type="phone" class="form-control" ng-model="user.phone" id="phone" placeholder="Teléfono">
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-				<label for="role">Role</label>
+				<label for="url">País de origen</label>
+				<select class="form-control" ng-model="user.entity.country" id="country" ng-options="country as country.description for country in countries track by country._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="state">Estado de origen</label>
+				<select class="form-control" ng-model="user.entity.state" id="state" ng-options="state as state.description for state in statesByCountry(user.entity.country) track by state._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="city">Ciudad de origen</label>
+				<select class="form-control" ng-model="user.entity.city" id="city" ng-options="city as city.description for city in citiesByState(user.entity.state) track by city._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="url">Fecha de Ingreso</label>
+				<sc-datepicker ng-model="user.ingressDate"></sc-datepicker>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="period">Período</label>
+				<select class="form-control" ng-model="user.period" id="period" ng-options="period as period.description for period in periods track by period._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="participantType">Tipo de participante</label>
+				<select class="form-control" ng-model="user.participantType" id="participantType" ng-options="participantType as participantType.description for participantType in participantTypes track by participantType._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="programType">Tipo de Programa</label>
+				<select class="form-control" ng-model="user.programType" id="programType" ng-options="programType as programType.description for programType in programTypes track by programType._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6" ng-if="user.programType._id == 2">
+			<div class="form-group">
+				<label for="program">Programa</label>
+				<select class="form-control" ng-model="user.program" id="program" ng-options="program as program.description for program in programs track by program._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6" >
+			<div class="form-group">
+				<label for="program">Los mensajes llegarán vía:</label>
+				<select class="form-control" ng-model="user.messageType" id="program" ng-options="messageType as messageType.description for messageType in messageTypes track by messageType._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="role">Rol</label>
 				<select class="form-control" ng-model="user.role" id="role" ng-options="role as role.description for role in roles track by role._id"></select>
 			</div>
-		</div>
-		
-		<div class="col-xs-12">
-			<h2 class="pull-left"><i class="fa fa-map"></i>&nbsp;Addresses</h2>
-			<button type="button" class="btn btn-sm btn-primary pull-right" style="margin-top:20px" ng-click="addAddress()"><i class="fa fa-plus"></i></button>
-		</div>
-		<div class="col-xs-12" ng-repeat="address in user.addresses track by $index">
-			<div class="col-xs-12">
-				<button type="button" class="btn btn-sm btn-danger pull-right" style="margin-top:20px;" ng-click="removeAddress($index)"><i class="fa fa-minus"></i></button>
-			</div>
-			<address-model ng-model="user.addresses[$index]"></address-model>
-		</div>
-		<div class="col-xs-12">
-			<h2 class="pull-left"><i class="fa fa-phone"></i>&nbsp;Phone List</h2>
-			<button type="button" class="btn btn-sm btn-primary pull-right" style="margin-top:20px" ng-click="addPhone()"><i class="fa fa-plus"></i></button>
-		</div>
-		<div class="col-xs-12" ng-repeat="phone in user.phones track by $index">
-			<div class="col-xs-12">
-				<button type="button" class="btn btn-sm btn-danger pull-right" style="margin-top:20px;" ng-click="removePhone($index)"><i class="fa fa-minus"></i></button>
-			</div>
-			<phone-model ng-model="user.phones[$index]"></phone-model>
 		</div>
 	</form>
 </div>

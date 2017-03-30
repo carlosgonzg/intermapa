@@ -1,7 +1,7 @@
 angular.module('IntermapaApp')
 .directive('crudTypeTable', function () {
 	return {
-		templateUrl : 'views/directives/crudTypeTable.html',
+		templateUrl : 'modules/directives/crudTypeTable/crudTypeTable.html',
 		restrict : 'E',
 
 		scope : {

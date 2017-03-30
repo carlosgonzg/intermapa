@@ -1,1 +1,30 @@
-SUP
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="pull-left">
+            <i class="fa fa-lg fa-newspaper-o"></i> <span>Noticias de Hoy</span>
+        </h1>
+        <hr />
+    </div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<div ng-repeat="new in news" ng-if="isToday(new.createdDate)">
+			<card ng-model="new"></card>
+		</div>
+	</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="pull-left">
+            <i class="fa fa-lg fa-newspaper-o"></i> <span>Noticias Anteriores</span>
+        </h1>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div ng-repeat="new in news" ng-if="!isToday(new.createdDate)">
+            <card ng-model="new"></card>
+        </div>
+    </div>
+</div>

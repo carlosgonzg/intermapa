@@ -44,10 +44,6 @@ function User(db, secret, userLogged) {
 			fullName : {
 				type : 'string',
 				required : true
-			},
-			url : {
-				type : 'string',
-				required : false
 			}
 		}
 	};
@@ -80,7 +76,7 @@ function User(db, secret, userLogged) {
 			},
 			status : {
 				type : 'object',
-				required : true
+				required : false
 			}
 		}
 	};
@@ -109,7 +105,7 @@ User.prototype.changePassword = function (email, newPassword) {
 			user.account.password = _this.encryptPassword(newPassword);
 			return _this.crud.update(query, user)
 		} else {
-			throw new Error('Couldn\'t find user');
+			throw new Error('No se pudo encontrar el usuario');
 		}
 	})
 	.then(function (obj) {
@@ -140,7 +136,7 @@ User.prototype.forgetPassword = function (email, urlServer) {
 			mail.sendForgotPasswordMail(email, user.confirmToken, urlServer);
 			return _this.crud.update(query, user);
 		} else {
-			throw 'Couldn\'t find user';
+			throw 'No se pudo encontrar el usuario';
 		}
 	})
 	.then(function (obj) {
@@ -241,7 +237,7 @@ User.prototype.login = function (email, password) {
 	if (!email || !password) {
 		d.reject({
 			result : 'Not ok',
-			errors : 'email and/or password are empty'
+			errors : 'email y/o contraseña están vacías'
 		});
 	} else {
 		var query = {
@@ -250,14 +246,14 @@ User.prototype.login = function (email, password) {
 		this.crud.find(query)
 		.then(function (obj) {
 			if (obj.data.length < 0) {
-				throw 'The user doesn\'t exists';
+				throw 'El usuario no existe';
 			}
 			var user = obj.data[0];
 			if (!bcrypt.compareSync(password + _this.secret, user.account.password)) {
-				throw 'User and password doesn\'t match';
+				throw 'El usuario y/o la contraseña no concuerdan';
 			}
 			if (user.status._id == 2) {
-				throw 'User is not active';
+				throw 'El usuario no está activo';
 			}
 			return user;
 		})

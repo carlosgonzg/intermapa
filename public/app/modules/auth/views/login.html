@@ -1,16 +1,112 @@
-<div class="login col-xs-12 col-md-4 col-md-offset-4">
+<div class="login col-xs-12 col-md-4 col-md-offset-4" ng-if="!showRegister">
 	<div class="logo" style="margin: 0 auto;">
-			<img style="width:100%" src="../images/mobileone2.png" />
+		<h1 style="color:#1c7abf">Iniciar Sesión</h1>
 	</div>
-	<form class="form" style="margin-top: 20px">
+	<form id="loginForm" class="form" style="margin-top: 20px">
+		<div class="form-group">
+				<input type="text" class="form-control" id="username" placeholder="Email" ng-model="userData.account.email">
+		</div>
+		<div class="form-group">
+				<input type="password" class="form-control" id="password" placeholder="Password" ng-model="userData.account.password">
+		</div>
+		<a ng-click="forgetPassword()">¿Olvidó su contraseña?</a>
+		<br/>
+		<a ng-click="changeToRegister()">Soy nuevo, quiero registrarme</a>
+		<hr style="margin-top:20px;"/>
+		<button type="submit" class="btn btn-primary pull-right" ng-click="login()">Log In</button>
+	</form>
+</div>
+<div class="login col-xs-12 col-md-4 col-md-offset-4" ng-if="showRegister">
+	<div class="logo" style="margin: 0 auto;">
+		<h1 style="color:#1c7abf">Registro de Usuario</h1>
+	</div>
+	<form id="loginForm" class="form" style="margin-top: 20px">
+			<form class="form" id="userForm" name="userForm">
+		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-					<input type="text" class="form-control" id="username" placeholder="Email" ng-model="userData.account.email">
+				<label for="firstName">Nombre</label>
+				<input type="text" class="form-control" ng-model="userData.entity.firstName" id="firstName" placeholder="First Name">
 			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-					<input type="password" class="form-control" id="password" placeholder="Password" ng-model="userData.account.password">
+				<label for="lastName">Apellido</label>
+				<input type="text" class="form-control" ng-model="userData.entity.lastName" id="lastName" placeholder="Last Name">
 			</div>
-			<a ng-click="forgetPassword()">Forgot Password?</a>
-			<hr style="margin-top:20px;"/>
-			<button type="submit" class="btn btn-primary pull-right" ng-click="login()">Log In</button>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="birthday">Fecha de Nacimiento</label>
+				<sc-datepicker ng-model="userData.entity.birthday"></sc-datepicker>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" class="form-control" ng-model="userData.account.email" id="email" placeholder="Email">
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="phone">Teléfono</label>
+				<input type="phone" class="form-control" ng-model="userData.phone" id="phone" placeholder="Teléfono">
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="url">País de origen</label>
+				<select class="form-control" ng-model="userData.entity.country" id="country" ng-options="country as country.description for country in countries track by country._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="state">Estado de origen</label>
+				<select class="form-control" ng-model="userData.entity.state" id="state" ng-options="state as state.description for state in statesByCountry(userData.entity.country) track by state._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="city">Ciudad de origen</label>
+				<select class="form-control" ng-model="userData.entity.city" id="city" ng-options="city as city.description for city in citiesByState(userData.entity.state) track by city._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="url">Fecha de Ingreso</label>
+				<sc-datepicker ng-model="userData.ingressDate"></sc-datepicker>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="period">Período</label>
+				<select class="form-control" ng-model="userData.period" id="period" ng-options="period as period.description for period in periods track by period._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="participantType">Tipo de participante</label>
+				<select class="form-control" ng-model="userData.participantType" id="participantType" ng-options="participantType as participantType.description for participantType in participantTypes track by participantType._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="programType">Tipo de Programa</label>
+				<select class="form-control" ng-model="userData.programType" id="programType" ng-options="programType as programType.description for programType in programTypes track by programType._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6" ng-if="userData.programType._id == 2">
+			<div class="form-group">
+				<label for="program">Programa</label>
+				<select class="form-control" ng-model="userData.program" id="program" ng-options="program as program.description for program in programs track by program._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="program">Los mensajes llegarán vía:</label>
+				<select class="form-control" ng-model="user.messageType" id="program" ng-options="messageType as messageType.description for messageType in messageTypes track by program._id"></select>
+			</div>
+		</div>
+		<hr style="margin-top:20px;"/>
+		<button type="submit" class="btn btn-primary pull-right" ng-click="register()">Registrarme</button>
 	</form>
 </div>

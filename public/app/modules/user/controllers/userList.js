@@ -12,15 +12,19 @@ angular.module('IntermapaApp')
 	$scope.wsUser = User;
 
 	$scope.fields = [{
-			title : 'Name',
-			name : 'entity.fullName',
+			title : 'Nombre',
+			name : 'entity.firstName',
+			type : 'text'
+		},{
+			title : 'Apellido',
+			name : 'entity.lastName',
 			type : 'text'
 		}, {
 			title : 'Email',
 			name : 'account.email',
 			type : 'text'
 		}, {
-			title : 'Role',
+			title : 'Rol',
 			name : 'role.description',
 			type : 'text'
 		}
@@ -29,7 +33,8 @@ angular.module('IntermapaApp')
 	$scope.search = [
 		'_id',
 		'entity',
-		'entity.fullName',
+		'entity.firstName',
+		'entity.lastName',
 		'account.email',
 		'role.description'
 	];

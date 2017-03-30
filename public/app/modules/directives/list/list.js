@@ -1,7 +1,7 @@
 angular.module('IntermapaApp')
 .directive('list', function () {
 	return {
-		templateUrl : 'views/directives/lists.html',
+		templateUrl : 'modules/directives/list/lists.html',
 		restrict : 'E',
 		scope : {
 			clase : '=clase',
@@ -254,7 +254,8 @@ angular.module('IntermapaApp')
 			};
 			// Funcion para buscar un elemento especifico
 			$scope.search = function () {
-				$scope.objeto.paginatedCount($scope.params).then(function (res) {
+				$scope.objeto.paginatedCount($scope.params)
+				.then(function (res) {
 					res = res.count;
 					$scope.currentPage = 1;
 					$scope.maxPage = res < $scope.params.limit ? 1 : Math.ceil(res / $scope.params.limit);
@@ -287,7 +288,7 @@ angular.module('IntermapaApp')
 					if ($scope.dblClickFn) {
 						$scope.dblClickFn(elem);
 					} else {
-						elem.goTo(elem._id);
+						elem.goTo();
 					}
 				}
 			};

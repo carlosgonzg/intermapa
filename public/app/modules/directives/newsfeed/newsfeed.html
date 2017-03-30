@@ -1,14 +1,16 @@
 <div class="newsfeed-card">
-	<div class="newsfeed-img">
-		<img alt="#ImAPivot: A Community for The World’s Leading Software Experts" src="https://content.cdntwrk.com/mediaproxy?url=https%3A%2F%2Fuberflip.cdntwrk.com%2Ffiles%2FaHViPTYzOTc1JmNtZD1pdGVtZWRpdG9yaW1hZ2UmZmlsZW5hbWU9aXRlbWVkaXRvcmltYWdlXzU4YzBhN2YxN2EyZTMucG5nJnZlcnNpb249MDAwMCZzaWc9MWI5MTI3YzYxZmQ5YjA1MTlhZjA0Mjg0ZDMzZTYxYWY%25253D&amp;size=1&amp;version=1490306045&amp;sig=ba751cff8b10b6ae659ef7b666846ce6&amp;default=hubs%2Ftilebg-blogs.jpg" class="taller" style="margin-top: 0px;">
+	<div class="newsfeed-img" style="background-color: #1c7abf; color: white; padding: 20px">
+		<i class="fa fa-4x fa-calendar" ng-if="ngModel.cardType =='event'"></i>
+		<i class="fa fa-4x fa-newspaper-o" ng-if="ngModel.cardType =='news'"></i>
+		<i class="fa fa-4x fa-question-circle" ng-if="ngModel.cardType =='form'"></i>
 	</div>
 	<div class="newsfeed-description">
-		<div class="timestamp">
-			<abbr class="timeago" title="2017-03-09T08:03:00">
-				20 days ago
-			</abbr>
+		<div class="timestamp" style="margin-top:150px">
+			<p class="timeago">
+				{{ngModel.createdDate|date:'dd/MM hh:mm a'}}
+			</p>
 		</div>
-		<h3>#ImAPivot: A Community for The World’s Leading Software Experts</h3>
+		<h3 ng-bind-html="ngModel.title"></h3>
 	</div>
-	<a class="newsfeed-link">Leer más</a>
+	<a class="newsfeed-link" ng-click="goTo(ngModel)" ng-if="['news','form'].indexOf(ngModel.cardType) != -1">Leer más</a>
 </div>

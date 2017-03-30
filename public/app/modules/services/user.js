@@ -13,8 +13,6 @@ angular.module('IntermapaApp')
 		User.super.constructor.apply(this, arguments);
 		this.baseApiPath = "/api/user";
 		this.account = this.account || {};
-		this.addresses = this.addresses || [];
-		this.phones = this.phones || [];
 		this.role = this.role || null;
 	}
 	var extend = function (child, parent) {
@@ -45,7 +43,7 @@ angular.module('IntermapaApp')
 	User.prototype.getRoleOptions = function(){
 		var d = $q.defer();
 		var roleOptions = new RoleOptions();
-		roleOptions.filter({ roleId: this.role._id, sort: { $ne: 0 } })
+		roleOptions.filter({ roleId: this.role._id})
 		.then(function(result){
 			result.data.sort(function(a, b){
 				return a.sort - b.sort;
@@ -67,19 +65,21 @@ angular.module('IntermapaApp')
 			delete: false,
 			update: false
 		};
-		if(['/login', '/noaccess', '/'].indexOf(path) == -1){
+		if(['/login', '/noaccess', '/', '/faq', '/contactus'].indexOf(path) == -1){
 			var isHere = false;
-			$rootScope.roleOptions.forEach(function(rOption){
-				if(rOption.option.url == path){
-					result.read = rOption.read;
-					result.write = rOption.write;
-					result.delete = rOption.delete;
-					result.update = rOption.update;
-					isHere = true;
+			if($rootScope.roleOptions){
+				$rootScope.roleOptions.forEach(function(rOption){
+					if(rOption.option.url == path){
+						result.read = rOption.read;
+						result.write = rOption.write;
+						result.delete = rOption.delete;
+						result.update = rOption.update;
+						isHere = true;
+					}
+				});
+				if(!isHere){
+					$location.path('/noaccess');
 				}
-			});
-			if(!isHere){
-				$location.path('/noaccess');
 			}
 		}
 		return result;
@@ -88,7 +88,8 @@ angular.module('IntermapaApp')
 		var d = $q.defer();
 		var _this = this;
 		$http.get(_this.baseApiPath + '/actual')
-		.success(function (result) {
+		.then(function (result) {
+			result = result.data;
 			_this.assignProperties(result.data);
 			$rootScope.userData = _this;
 			$rootScope.isAuthenticated = true;
@@ -100,8 +101,7 @@ angular.module('IntermapaApp')
 				d.resolve(_this);
 			});
 			
-		})
-		.error(function (error) {
+		},function (error) {
 			d.reject(error);
 		});
 		return d.promise;
@@ -110,11 +110,12 @@ angular.module('IntermapaApp')
 		var d = $q.defer();
 		var _this = this;
 		$http.post('/user/register', _this)
-		.success(function (result) {
+		.then(function (result) {
+			result = result.data;
 			_this.assignProperties(result.data);
 			d.resolve(_this);
-		})
-		.error(function (error) {
+		},
+		function (error) {
 			d.reject(error);
 		});
 		return d.promise;
@@ -127,37 +128,37 @@ angular.module('IntermapaApp')
 			password : this.account.password
 		};
 		$http.post('/user/login', query)
-		.success(function (result) {
+		.then(function (result) {
+			result = result.data;
+			console.log(result)
 			$window.sessionStorage.token = result.token;
 			_this.getActualUser()
 			.then(function (result) {
+				console.log(result)
 				d.resolve(result)
 			},
 				function (error) {
-				toaster.error(error.errors);
+				toaster.error('', error.data.errors);
 				d.reject(error);
 			});
-		})
-		.error(function (error) {
-			console.log(error);
-			toaster.error(error.errors);
+		},function (error) {
+			toaster.error('', error.data.errors);
 			d.reject(error);
 		});
 		return d.promise;
 	};
 	User.prototype.forgetPassword = function(){
 		var _this = this;
-		var dialog = dialogs.create('views/forgetPassword.html', 'ForgetPasswordCtrl');
+		var dialog = dialogs.create('modules/auth/views/forgetPassword.html', 'ForgetPasswordCtrl');
 		dialog.result.then(function (res) {
 			$http.post('/user/forgetPassword', {
 				email: res
 			})
-			.success(function(result){
-				toaster.success('The email was sent successfully');
-			})
-			.error(function (error) {
+			.then(function(result){
+				toaster.success('', 'El correo fue enviado exitosamente');
+			},function (error) {
 				console.log(error);
-				toaster.error(error.errors);
+				toaster.error('', error.errors);
 				d.reject(error);
 			});
 		}, function (res) {});

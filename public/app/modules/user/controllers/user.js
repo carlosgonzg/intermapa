@@ -12,17 +12,77 @@ angular.module('IntermapaApp')
 	$scope.user = user;
 	$scope.roles = roles.data || [];
 
-	$scope.addAddress = function () {
-		$scope.user.addresses.push({});
+	//listado
+	$scope.countries = [{
+		_id: 1,
+		description: 'República Dominicana'
+	}];
+	$scope.states = [{
+		_id: 1,
+		description: 'Santo Domingo',
+		countryId: 1
+	}];
+	$scope.cities = [{
+		_id: 1,
+		description: 'Distrito Nacional',
+		stateId: 1
+	}];
+	$scope.periods = [{
+		_id: 12,
+		description: 'Anual'
+	},{
+		_id: 6,
+		description: 'Semestral'
+	},{
+		_id: 3,
+		description: 'Trimestral'
+	},{
+		_id: 1,
+		description: 'Intensivo'
+	}];
+	$scope.participantTypes = [{
+		_id: 1,
+		description: 'Envío'
+	},{
+		_id: 2,
+		description: 'Hospedaje'
+	}];
+	$scope.programTypes = [{
+		_id: 1,
+		description: 'Programa Escolar'
+	},{
+		_id: 2,
+		description: 'Programa de Adulto'
+	}];
+	$scope.programs = [{
+		_id: 1,
+		description: 'Voluntario extranjero'
+	},{
+		_id: 2,
+		description: 'Educatores'
+	},{
+		_id: 3,
+		description: 'Universitario'
+	},{
+		_id: 4,
+		description: 'Otros'
+	}];
+	$scope.messageTypes = [{
+		_id: 1,
+		description: 'Correo'
+	},{
+		_id: 1,
+		description: 'Teléfono'
+	}];
+	$scope.statesByCountry = function(country){
+		if(country === undefined)
+			return [];
+		return _.filter($scope.states, function(doc){ return doc.countryId == country._id; });
 	};
-	$scope.removeAddress = function (index) {
-		$scope.user.addresses.splice(index, 1);
-	};
-	$scope.addPhone = function () {
-		$scope.user.phones.push({});
-	};
-	$scope.removePhone = function (index) {
-		$scope.user.phones.splice(index, 1);
+	$scope.citiesByState = function(state){
+		if(state === undefined)
+			return [];
+		return _.filter($scope.cities, function(doc){ return doc.stateId == state._id; });
 	};
 	
 	$scope.save = function () {
@@ -32,7 +92,7 @@ angular.module('IntermapaApp')
 			$scope.user.register()
 			.then(function (data) {
 				toaster.success('The user was registered successfully');
-				$location.path('userList')
+				$location.path('users')
 			},
 				function (error) {
 				console.log(error);
@@ -42,7 +102,7 @@ angular.module('IntermapaApp')
 			$scope.user.update()
 			.then(function (data) {
 				toaster.success('The user was updated successfully');
-				$location.path('userList');
+				$location.path('users');
 			},
 				function (error) {
 				console.log(error);

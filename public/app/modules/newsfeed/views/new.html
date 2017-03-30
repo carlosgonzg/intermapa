@@ -1,0 +1,75 @@
+<div class="row" ng-if="!readOnly">
+	<div class="col-xs-12">
+		<h1 class="pull-left">
+			<i class="fa fa-lg fa-user"></i> <span> Publicación</span>
+		</h1>
+		<div class="btn-group pull-right" style="margin-top: 20px;" role="group" aria-label="...">
+			<button type="submit" form="userForm" class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>&nbsp;<span>Guardar</span></button>
+			<back-button></back-button>
+		</div>
+		<hr />
+	</div>
+</div>
+<div class="row" ng-if="readOnly">
+	<div class="col-xs-12">
+		<div class="pull-right" style="margin-top: 20px;" role="group" aria-label="...">
+			<a href="#!/"><i class="fa fa-reply"></i>&nbsp;<span>Volver a publicaciones</span></a>
+		</div>
+		<hr />
+		<div>
+			<img alt="Imagen" src="{{news.photoUrl || 'images/default.png'}}" class="taller" style="margin-top: 0px;">
+		</div>
+	</div>
+</div>
+<div class="col-xs-12 col-md-6">
+	<form class="form" id="userForm" name="newsForm">
+		<div class="col-xs-12 col-md-12" ng-if="!readOnly">
+			<div class="form-group">
+				<label for="date">Fecha</label>
+				<sc-datepicker ng-model="news.date" ng-disabled="true"></sc-datepicker>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12" ng-if="!readOnly">
+			<div class="form-group">
+				<label for="isMessage">Enviar como mensaje</label>
+				<input id="isMessage" type="checkbox" ng-model="news.isMessage"/>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12" ng-if="!readOnly">
+			<div class="form-group">
+				<label for="title">Título</label>
+				<text-angular ng-model="news.title" id="title"></text-angular>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12" ng-if="!readOnly">
+			<div class="form-group">
+				<label for="body">Cuerpo</label>
+				<text-angular ng-model="news.body" id="body"></text-angular>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12" ng-if="!readOnly">
+			<div class="form-group">
+				<label for="body">Lo puede ver:</label>
+				<button class="btn btn-success btn-sm" ng-click="addAccess()">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+			<div class="col-xs-12" ng-repeat="access in news.access track by $index">
+				<div class="form-group col-xs-10">
+					<select class="form-control" ng-model="news.access[$index]" id="access" ng-options="accessType._id as accessType.description for accessType in accessTypes"></select>
+				</div>
+				<div class="form-group col-xs-2">
+					<button class="btn btn-danger btn-sm" ng-click="removeAccess($index)">
+						<i class="fa fa-remove"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<h1 class="col-xs-12 col-md-12" ng-bind-html="news.title" ng-if="readOnly"></h1>
+		<hr ng-if="readOnly"/>
+		<p class="pull-right" ng-if="readOnly">
+			{{news.createdDate|date:'dd-MM hh:mm a'}}
+		</p>
+		<div class="col-xs-12 col-md-12" ng-bind-html="news.body" ng-if="readOnly"></div>
+	</form>
+</div>

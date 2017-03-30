@@ -45,10 +45,11 @@ angular.module('IntermapaApp')
 	Base.prototype.find = function () {
 		var deferred = $q.defer();
 		var _this = this.constructor;
-		$http.get(this.baseApiPath).success(function (data, status, headers, config) {
+		$http.get(this.baseApiPath)
+		.then(function (data, status, headers, config) {
 			var response = {},
 			data = data.data;
-
+			data = data.data;
 			//Create a new object of the current class (or an array of them) and return it (or them)
 			if (Array.isArray(data)) {
 				response.data = data.map(function (obj) {
@@ -64,7 +65,8 @@ angular.module('IntermapaApp')
 				response = new _this(data);
 			}
 			return deferred.resolve(response);
-		}).error(function (data, status, headers, config) {
+		})
+		.catch(function (data, status, headers, config) {
 			return deferred.reject(data);
 		});
 		return deferred.promise;
@@ -73,10 +75,11 @@ angular.module('IntermapaApp')
 	Base.prototype.filter = function (query) {
 		var deferred = $q.defer();
 		var _this = this.constructor;
-		$http.post(this.baseApiPath + '/filter', query).success(function (data, status, headers, config) {
+		$http.post(this.baseApiPath + '/filter', query)
+		.then(function (data, status, headers, config) {
 			var response = {},
 			data = data.data;
-
+			data = data.data;
 			//Create a new object of the current class (or an array of them) and return it (or them)
 			if (Array.isArray(data)) {
 				response.data = data.map(function (obj) {
@@ -92,7 +95,8 @@ angular.module('IntermapaApp')
 				response = new _this(data);
 			}
 			return deferred.resolve(response);
-		}).error(function (data, status, headers, config) {
+		})
+		.catch(function (data, status, headers, config) {
 			return deferred.reject(data);
 		});
 		return deferred.promise;
@@ -103,10 +107,11 @@ angular.module('IntermapaApp')
 		var deferred = $q.defer(),
 		_this = this.constructor;
 		//    console.log(params, 'params');
-		$http.get(this.baseApiPath + '?id=' + id).success(function (data, status, headers, config) {
+		$http.get(this.baseApiPath + '/' + id)
+		.then(function (data, status, headers, config) {
 			var response = {},
 			data = data.data;
-
+			data = data.data;
 			//Create a new object of the current class (or an array of them) and return it (or them)
 			if (Array.isArray(data)) {
 				response.data = data.map(function (obj) {
@@ -122,7 +127,8 @@ angular.module('IntermapaApp')
 				response = new _this(data);
 			}
 			return deferred.resolve(response.data[0]);
-		}).error(function (data, status, headers, config) {
+		})
+		.catch(function (data, status, headers, config) {
 			return deferred.reject(data);
 		});
 		return deferred.promise;
@@ -143,8 +149,10 @@ angular.module('IntermapaApp')
 		// console.log("\n\n PaginatedSearch: ", params);
 		if (params) {
 			// console.log('----- Aqui ----');
-			$http.post(this.baseApiPath + '/paginated', params).success(function (data, status, headers, config) {
+			$http.post(this.baseApiPath + '/paginated', params)
+			.then(function (data, status, headers, config) {
 				var response = {},
+				data = data.data;
 				data = data.data;
 				// Create a new object of the current class (or an array of them) and return it (or them)
 				if (Array.isArray(data)) {
@@ -161,7 +169,8 @@ angular.module('IntermapaApp')
 					response = new _this(data);
 				}
 				return deferred.resolve(response);
-			}).error(function (data, status, headers, config) {
+			})
+			.catch(function (data, status, headers, config) {
 				return deferred.reject(data);
 			});
 		} else {
@@ -180,8 +189,10 @@ angular.module('IntermapaApp')
 		_this = this.constructor;
 
 		if (params) {
-			$http.post(this.baseApiPath + '/paginated/count', params).success(function (data, status, headers, config) {
+			$http.post(this.baseApiPath + '/paginated/count', params)
+			.then(function (data, status, headers, config) {
 				var response = {},
+				data = data.data;
 				data = data.data;
 				//Create a new object of the current class (or an array of them) and return it (or them)
 				if (Array.isArray(data)) {
@@ -203,7 +214,8 @@ angular.module('IntermapaApp')
 					response = new _this(data);
 				}
 				return deferred.resolve(response);
-			}).error(function (data, status, headers, config) {
+			})
+			.catch(function (data, status, headers, config) {
 				return deferred.reject(data);
 			});
 		} else {
@@ -247,9 +259,11 @@ angular.module('IntermapaApp')
 						obj : data
 					});
 			}
-			promise.success(function (data, status, headers, config) {
+			promise.then(function (data, status, headers, config) {
+				data = data.data;
 				return deferred.resolve(_this.successCallback(data, status, headers, config));
-			}).error(function (data, status, headers, config) {
+			}).catch(function (data, status, headers, config) {
+				data = data.data;
 				return deferred.reject(_this.failureCallback(data, status, headers, config));
 			});
 		} else {
@@ -276,9 +290,11 @@ angular.module('IntermapaApp')
 						obj : data
 						//,query: params
 					});
-				promise.success(function (data, status, headers, config) {
+				promise.then(function (data, status, headers, config) {
+					data = data.data;
 					return deferred.resolve(_this.successCallback(data, status, headers, config));
-				}).error(function (data, status, headers, config) {
+				}).catch(function (data, status, headers, config) {
+					data = data.data;
 					return deferred.reject(_this.failureCallback(data, status, headers, config));
 				});
 			} else {
@@ -304,9 +320,11 @@ angular.module('IntermapaApp')
 		$http.delete (url, {
 			query : params
 		})
-		.success(function (data, status, headers, config) {
+		.then(function (data, status, headers, config) {
+			data = data.data;
 			return deferred.resolve(_this.successCallback(data, status, headers, config));
-		}).error(function (data, status, headers, config) {
+		}).catch(function (data, status, headers, config) {
+			data = data.data;
 			return deferred.reject(_this.failureCallback(data, status, headers, config));
 		});
 
@@ -320,10 +338,13 @@ angular.module('IntermapaApp')
 
 		 : params;
 
-		$http.post("" + this.baseApiPath + "/count", params).success(function (data, status, headers, config) {
+		$http.post("" + this.baseApiPath + "/count", params).then(function (data, status, headers, config) {
+			data = data.data;
 			return deferred.resolve(_this.successCallback(data, status, headers, config));
 		})
-		.error(function (data, status, headers, config) {
+		.catch
+		(function (data, status, headers, config) {
+			data = data.data;
 			return deferred.reject(_this.failureCallback(data, status, headers, config));
 		});
 
