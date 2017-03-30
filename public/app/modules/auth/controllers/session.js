@@ -20,7 +20,6 @@ angular.module('IntermapaApp')
 		.then(function(data){
 			$rootScope.roleOptions = data;
 			$window.sessionStorage.roleOptions = JSON.stringify(data);
-			console.log($rootScope.userData.getAccessOfView());
 		})
 		.catch(function (error) {
 			$location.path('/login');
@@ -31,7 +30,7 @@ angular.module('IntermapaApp')
 		if($rootScope.userData && $rootScope.userData.getAccessOfView){
 			console.log($rootScope.userData.getAccessOfView());
 		}
-		if (!$window.sessionStorage.token && ($location.path() != '/login' && $location.path() != '/register' && $location.path().substr(0, 15) != "/changepassword" && $location.path().substr(0, 14) != "/confirm/email")) {
+		if (!$window.sessionStorage.token && ($location.path() != '/' && $location.path() != '/login' && $location.path() != '/register' && $location.path().substr(0, 15) != "/changepassword" && $location.path().substr(0, 14) != "/confirm/email")) {
 			$location.path('/login');
 		}
 	});
