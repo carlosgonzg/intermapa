@@ -1,0 +1,38 @@
+<div class="col-xs-12">
+	<label for="body">Lo puede ver:</label>
+</div>
+<div class="col-xs-12" style="margin-bottom:10px">
+	<div class="col-xs-5">
+		Tipo de Acceso
+	</div>
+	<div class="col-xs-5">
+		Valor
+	</div>
+	<div class="col-xs-2">
+		
+	</div>
+</div>
+<div class="col-xs-12" style="margin-bottom:10px">
+	<div class="col-xs-5">
+		<select class="form-control" ng-model="newAccess.accessType" id="newAccessType" ng-options="accessType._id as accessType.description for accessType in list.accessTypes" ng-change="setAccessValue(newAccess.accessType)"></select>
+	</div>
+	<div class="col-xs-5">
+		<select class="form-control" ng-model="newAccess.accessValue" id="newAccessValue" ng-options="accessValue._id as accessValue.description for accessValue in newAccess.listValue" ng-if="['', 'public', 'all', 'email'].indexOf(newAccess.accessType) == '-1'"></select>
+		<input type="email" class="form-control" ng-model="newAccess.accessValue" ng-if="['email'].indexOf(newAccess.accessType) != '-1'"/>
+	</div>
+	<div class="col-xs-2">
+		<button class="btn btn-success btn-sm pull-right" ng-click="addAccess(newAccess.accessType, newAccess.accessValue)" ng-disabled="['', 'public', 'all'].indexOf(newAccess.accessType) == -1 && !newAccess.accessValue">
+			<i class="fa fa-plus"></i>
+		</button>
+	</div>
+</div>
+<div class="col-xs-12" ng-repeat="access in ngModel track by $index">
+	<div class="form-group col-xs-10">
+		{{getDescription(access)}}&nbsp;({{getType(access)}})
+	</div>
+	<div class="form-group col-xs-2">
+		<button class="btn btn-danger btn-sm pull-right" ng-click="removeAccess($index)">
+			<i class="fa fa-remove"></i>
+		</button>
+	</div>
+</div>

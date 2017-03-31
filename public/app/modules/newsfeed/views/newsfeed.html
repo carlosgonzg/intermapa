@@ -3,28 +3,33 @@
         <h1 class="pull-left">
             <i class="fa fa-lg fa-newspaper-o"></i> <span>Noticias de Hoy</span>
         </h1>
-        <hr />
     </div>
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<div ng-repeat="new in news" ng-if="isToday(new.createdDate)">
+		<div ng-repeat="new in news.now">
 			<card ng-model="new"></card>
 		</div>
+        <div ng-if="news.now.length <= 0">
+            <h2>No existen publicaciones para hoy</h2>
+        </div>
 	</div>
 </div>
-<div class="row">
+<div class="row" style="margin-top:50px;">
     <div class="col-xs-12">
         <h1 class="pull-left">
-            <i class="fa fa-lg fa-newspaper-o"></i> <span>Noticias Anteriores</span>
+            <i class="fa fa-lg fa-newspaper-o"></i> <span>Noticias Pasadas</span>
         </h1>
         <hr />
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <div ng-repeat="new in news" ng-if="!isToday(new.createdDate)">
+        <div ng-repeat="new in news.past">
             <card ng-model="new"></card>
+        </div>
+        <div ng-if="news.past.length <= 0">
+            <h2>No existen publicaciones pasadas</h2>
         </div>
     </div>
 </div>

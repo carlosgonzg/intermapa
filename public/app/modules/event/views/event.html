@@ -12,17 +12,20 @@
 </div>
 <div class="col-xs-12 col-md-6">
 	<form class="form" id="userForm" name="userForm">
-		<div class="col-xs-12 col-md-6">
-			<div class="form-group">
-				<label for="description">Título</label>
-				<textarea class="textarea form-control" ng-model="event.title" id="description"></textarea>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-6">
+		<div class="col-xs-12 col-md-12">
 			<div class="form-group">
 				<label for="date">Fecha del Evento</label>
 				<sc-datepicker ng-model="event.date"></sc-datepicker>
 			</div>
 		</div>
+		<div class="col-xs-12 col-md-12">
+			<div class="form-group">
+				<label for="description">Título</label>
+				<textarea class="textarea form-control" ng-model="event.title" id="description"></textarea>
+			</div>
+		</div>
 	</form>
+</div>
+<div class="col-xs-12 col-md-6">
+	<access ng-model="event.access"></access>
 </div>

@@ -44,10 +44,20 @@ News.prototype.getNewsfeed = function(user){
 	var d = q.defer();
 	var _this = this;
 	var query = {
-			$and: [{ access: 'public' }]
+		access: { 
+			$in:['public'] 
+		}
 	};
-	if(user._id){
-		//pongo todos los otros 
+	if(user !== undefined && user._id !== undefined){
+		query.access.$in.push('all')
+		//pongo todos los otros
+		//pongo pais
+		query.access.$in.push('role-' + user.role._id);
+		query.access.$in.push('period-' + user.period._id);
+		query.access.$in.push('participantType-' + user.participantType._id);
+		query.access.$in.push('programType-' + user.programType._id);
+		query.access.$in.push('country-' + user.entity.country._id);
+		query.access.$in.push('email-' + user.account.email);
 	}
 	var output = [];
 	_this.crud.find(query)
@@ -73,7 +83,13 @@ News.prototype.getNewsfeed = function(user){
 		output.sort(function(a,b){
 			return b.createdDate - a.createdDate;
 		})
-		d.resolve({ data: output });
+		var today = new Date();
+		d.resolve({ 
+			data: {
+				now: _.filter(output, function(doc){ return doc.createdDate.getFullYear() == today.getFullYear() && doc.createdDate.getMonth() == today.getMonth() && doc.createdDate.getDate() == today.getDate(); }),
+				past: _.filter(output, function(doc){ return !(doc.createdDate.getFullYear() == today.getFullYear() && doc.createdDate.getMonth() == today.getMonth() && doc.createdDate.getDate() == today.getDate()); })
+			}
+		});
 	})
 	.catch(function(err){
 		d.reject(err);

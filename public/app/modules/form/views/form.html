@@ -10,87 +10,99 @@
 		<hr />
 	</div>
 </div>
-<form class="form" id="formForm" name="formForm">
-	<div class="row">
-		<div class="col-xs-12 col-md-6">
-			<div class="col-xs-12 col-md-12">
-				<div class="form-group">
-					<label for="title">Título</label>
-					<input type="text" class="form-control" ng-model="form.title" id="title" placeholder="Título">
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6">
-				<div class="form-group">
-					<label for="limit">Es único?</label>
-					<input type="checkbox" ng-model="form.limit" id="limit">
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12">
-			<h2>Preguntas</h2>
-		</div>
-	</div>
-	<div class="row col-xs-6">
-		<div class="pull-right">
-			<span>Agregar nueva pregunta</span>
-			<button ng-click="addQuestion()" class="btn btn-sm btn-success">
-				<i class="fa fa-plus"></i>
-			</button>
-		</div>
-	</div>
-	<div class="row" ng-repeat="question in form.questions">
-		<div class="col-xs-12" style="margin-top:10px; padding-bottom: 5px; border-bottom: 1px solid #1c1b7a">
-			<div class="col-xs-6">
-				<div class="pull-right">
-					<span>Remover pregunta</span>
-					<button ng-click="removeQuestion($index)" class="btn btn-sm btn-danger">
-						<i class="fa fa-remove"></i>
-					</button>
-				</div>
+<form class="form" id="formForm" name="formForm">	
+	<div class="col-xs-12 col-md-6">
+		<div class="row">
+			<div class="col-xs-12">
 				<div class="col-xs-12">
 					<div class="form-group">
-						<label for="text">Pregunta #{{$index + 1}}</label>
-						<input type="text" class="form-control" ng-model="question.text" id="text" placeholder="Pregunta">
+						<label for="title">Título</label>
+						<input type="text" class="form-control" ng-model="form.title" id="title" placeholder="Título">
 					</div>
 				</div>
-				<div class="col-xs-6">
-					<div class="form-group">
-						<label for="isRequired">Requerido</label>
-						<input type="checkbox" ng-model="question.isRequired" id="isRequired">
-					</div>
-				</div>
-				<div class="col-xs-6">
-					<div class="form-group">
-						<label for="type">Tipo</label>
-						<select class="form-control" ng-model="question.type" id="type" ng-options="type as type.description for type in types track by type.id" ng-change="setAnswer(question)"></select>
-					</div>
-				</div>
-				<div class="col-xs-12" ng-if="shouldHaveMultipleAnswer(question)">
-					<b>Respuestas</b>
-					<div class="pull-right">
-						<span>Agregar nueva respuesta</span>
-						<button ng-click="addAnswer($index)" class="btn btn-sm btn-success">
-							<i class="fa fa-plus"></i>
-						</button>
-					</div>
-				</div>
-				<div class="col-xs-12" ng-repeat="answer in question.answers" ng-if="shouldHaveMultipleAnswer(question)">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label for="text">Respuesta #{{$index + 1}}</label>
-							<input type="text" class="form-control" ng-model="answer.text" id="text" placeholder="Respuesta">
-						</div>
-					</div>
-					<div class="pull-right">
-						<span>Remover Respuesta</span>
-						<button ng-click="removeAnswer($parent.$index, $index)" class="btn btn-sm btn-danger">
-							<i class="fa fa-remove"></i>
-						</button>
+				<div class="col-xs-12">
+					<div class="checkbox" style="padding-top:25px">
+						<label for="limit">
+							<input type="checkbox" ng-model="form.limit" id="limit">Es único?
+						</label>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<h2>Preguntas</h2>
+			</div>
+		</div>
+		<div class="row" style="margin-bottom:10px">
+			<div class="col-xs-12">
+				<div class="col-xs-10">
+					<label>Agregar nueva pregunta</label>
+				</div>
+				<div class="col-xs-2">
+					<button ng-click="addQuestion()" class="btn btn-sm btn-success pull-right">
+						<i class="fa fa-plus"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row" ng-repeat="question in form.questions">
+			<div class="col-xs-12" style="margin-top:10px; padding-bottom: 5px;">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-xs-12">
+							<div class="form-group col-xs-10">
+								<label for="text">Pregunta #{{$index + 1}}</label>
+								<input type="text" class="form-control" ng-model="question.text" id="text" placeholder="Pregunta"/>
+							</div>
+							<div class="col-xs-2">
+								<button ng-click="removeQuestion($index)" class="btn btn-sm btn-danger pull-right" style="margin-right:-30px">
+									<i class="fa fa-remove"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="type">Tipo</label>
+								<select class="form-control" ng-model="question.type" id="type" ng-options="type as type.description for type in list.types track by type.id" ng-change="setAnswer(question)"></select>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="checkbox" style="margin-top:25px">
+								<label >
+									<input type="checkbox" ng-model="question.isRequired" id="isRequired"/>Requerido
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-12" ng-if="shouldHaveMultipleAnswer(question)" style="margin-bottom:10px">
+							<div class="col-xs-10">
+								<b>Respuestas</b>
+							</div>
+							<div class="col-xs-2">
+								<button ng-click="addAnswer($index)" class="btn btn-sm btn-success pull-right">
+									<i class="fa fa-plus"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-xs-12" ng-repeat="answer in question.answers" ng-if="shouldHaveMultipleAnswer(question)">
+							<div class="col-xs-12">
+								<div class="form-group col-xs-10">
+									<label for="text">Respuesta #{{$index + 1}}</label>
+									<input type="text" class="form-control" ng-model="answer.text" id="text" placeholder="Respuesta">
+								</div>
+								<div class="col-xs-2">
+									<button ng-click="removeAnswer($parent.$index, $index)" class="btn btn-sm btn-danger pull-right" style="margin-right:-15px">
+										<i class="fa fa-remove"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-md-6">
+		<access ng-model="form.access"></access>
 	</div>
 </form>

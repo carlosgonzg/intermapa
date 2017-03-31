@@ -24,7 +24,7 @@ angular.module('IntermapaApp')
 
 	$scope.search = [
 		'_id',
-		'description',
+		'title',
 		'date'
 	];
 

@@ -226,7 +226,7 @@ User.prototype.getMiniUser = function (user) {
 			_id: user.role._id
 		},
 		entity : {
-			fullName : user.entity.fullName
+			fullName : user.entity.firstName + ' ' + user.entity.lastName
 		}
 	};
 	return miniUser;
@@ -258,7 +258,7 @@ User.prototype.login = function (email, password) {
 			return user;
 		})
 		.then(function (obj) {
-			var token = jwt.sign(_this.getMiniUser(obj), _this.secret, {
+			var token = jwt.sign(obj, _this.secret, {
 					expiresInMinutes : 60 * 3
 				});
 			d.resolve({

@@ -40,7 +40,6 @@ angular.module('IntermapaApp')
 	};
 
 	News.prototype.goTo = function (readOnly) {
-		console.log(readOnly)
 		$location.path('/new/' + this._id).search({ read: readOnly ? '1':'0' });
 	};
 

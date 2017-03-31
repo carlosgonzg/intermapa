@@ -8,7 +8,7 @@
  * Controller of the IntermapaApp
  */
 angular.module('IntermapaApp')
-.controller('FormCtrl', function ($scope, form, toaster, $location) {
+.controller('FormCtrl', function ($scope, form, toaster, $location, List) {
 	$scope.form = form;
 	var Question = function(){
 		return {
@@ -21,19 +21,7 @@ angular.module('IntermapaApp')
 			text: ''
 		}
 	};
-	$scope.types = [{
-		id: 'text',
-		description: 'Respuesta abierta'
-	},{
-		id: 'boolean',
-		description: 'Si/No'
-	},{
-		id: 'number',
-		description: 'Numérica'
-	},{
-		id: 'multiple',
-		description: 'Selección Múltiple'
-	}];
+	$scope.list = List;
 
 	$scope.shouldHaveMultipleAnswer = function(question){
 		if(question && question.type){

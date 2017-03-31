@@ -55,7 +55,7 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
 				<label for="url">País de origen</label>
-				<select class="form-control" ng-model="userData.entity.country" id="country" ng-options="country as country.description for country in countries track by country._id"></select>
+				<select class="form-control" ng-model="userData.entity.country" id="country" ng-options="country as country.description for country in list.countries track by country._id"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
@@ -79,13 +79,13 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
 				<label for="period">Período</label>
-				<select class="form-control" ng-model="userData.period" id="period" ng-options="period as period.description for period in periods track by period._id"></select>
+				<select class="form-control" ng-model="userData.period" id="period" ng-options="period as period.description for period in list.periods track by period._id"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
 				<label for="participantType">Tipo de participante</label>
-				<select class="form-control" ng-model="userData.participantType" id="participantType" ng-options="participantType as participantType.description for participantType in participantTypes track by participantType._id"></select>
+				<select class="form-control" ng-model="userData.participantType" id="participantType" ng-options="participantType as participantType.description for participantType in list.participantTypes track by participantType._id"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
@@ -97,13 +97,13 @@
 		<div class="col-xs-12 col-md-6" ng-if="userData.programType._id == 2">
 			<div class="form-group">
 				<label for="program">Programa</label>
-				<select class="form-control" ng-model="userData.program" id="program" ng-options="program as program.description for program in programs track by program._id"></select>
+				<select class="form-control" ng-model="userData.program" id="program" ng-options="program as program.description for program in list.programs track by program._id"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
 				<label for="program">Los mensajes llegarán vía:</label>
-				<select class="form-control" ng-model="user.messageType" id="program" ng-options="messageType as messageType.description for messageType in messageTypes track by program._id"></select>
+				<select class="form-control" ng-model="user.messageType" id="program" ng-options="messageType as messageType.description for messageType in list.messageTypes track by program._id"></select>
 			</div>
 		</div>
 		<hr style="margin-top:20px;"/>
