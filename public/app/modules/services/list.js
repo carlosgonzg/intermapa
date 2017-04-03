@@ -32,30 +32,33 @@ angular.module('IntermapaApp')
 	}];
 	this.participantTypes = [{
 		_id: 1,
-		description: 'Envío'
+		description: 'Participante de Intercambio'
 	},{
 		_id: 2,
-		description: 'Hospedaje'
+		description: 'Participante de Hospedaje'
 	}];
 	this.programTypes = [{
 		_id: 1,
 		description: 'Programa Escolar'
 	},{
 		_id: 2,
-		description: 'Programa de Adulto'
+		description: 'Programa SENTIO'
 	}];
 	this.programs = [{
 		_id: 1,
-		description: 'Voluntario extranjero'
-	},{
-		_id: 2,
-		description: 'Educatores'
-	},{
-		_id: 3,
 		description: 'Universitario'
 	},{
+		_id: 2,
+		description: 'Idiomas'
+	},{
+		_id: 3,
+		description: 'Vocacional'
+	},{
 		_id: 4,
-		description: 'Otros'
+		description: 'Pasantía'
+	},{
+		_id: 4,
+		description: 'Servicio Comunitario'
 	}];
 	this.messageTypes = [{
 		_id: 1,
@@ -75,7 +78,7 @@ angular.module('IntermapaApp')
 		description: 'Voluntario'
 	},{
 		_id: 4,
-		description: 'Estudiante'
+		description: 'Participante'
 	}];
 	this.accessTypes = [{
 		_id: 'public',
@@ -91,13 +94,19 @@ angular.module('IntermapaApp')
 		description: 'Por Periodo'
 	},{
 		_id: 'participantType',
-		description: 'Por tipo de Participante'
+		description: 'Por Tipo de Participante'
 	},{
 		_id: 'programType',
-		description: 'Por tipo de Programa'
+		description: 'Por Programa General'
+	},{
+		_id: 'program',
+		description: 'Por Programa SENTIO'
 	},{
 		_id: 'country',
 		description: 'Por País'
+	},{
+		_id: 'task',
+		description: 'Por Tarea'
 	},{
 		_id: 'email',
 		description: 'Por Usuario'
@@ -114,6 +123,43 @@ angular.module('IntermapaApp')
 	},{
 		id: 'multiple',
 		description: 'Selección Múltiple'
+	}];
+	this.tasks = [{
+		_id: 1,
+		description: 'Reclutador de Familia'
+	},{
+		_id: 2,
+		description: 'Entrevistador de Familia'
+	},{
+		_id: 3,
+		description: 'Encargado de Registro'
+	},{
+		_id: 4,
+		description: 'Promoción y Mercadeo'
+	},{
+		_id: 5,
+		description: 'Mercadeo'
+	},{
+		_id: 6,
+		description: 'Mentor'
+	},{
+		_id: 7,
+		description: 'Voluntario de Soporte'
+	},{
+		_id: 8,
+		description: 'Facilitadores'
+	},{
+		_id: 9,
+		description: 'Monitores'
+	},{
+		_id: 10,
+		description: 'Relación con los Centros Educativos'
+	},{
+		_id: 11,
+		description: 'Desarrollador del Voluntariado'
+	},{
+		_id: 12,
+		description: 'Junta Directiva'
 	}];
 	return this;
 });

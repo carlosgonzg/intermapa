@@ -30,7 +30,7 @@ angular.module('IntermapaApp')
 		return child;
 	};
 	// Extender de la clase Base
-	extend(News, Base);
+	extend(Response, Base);
 
 	// Funcion que retorna las propiedades de una cuenta
 	Response.properties = function () {
@@ -39,8 +39,7 @@ angular.module('IntermapaApp')
 	};
 
 	Response.prototype.goTo = function (readOnly) {
-		console.log(readOnly)
-		$location.path('/response/' + this._id).search({ read: readOnly ? '1':'0' });
+		$location.path('/response/' + this.formId).search({ read: '1' });
 	};
 
 	return Response;

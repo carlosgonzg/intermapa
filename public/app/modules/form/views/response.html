@@ -1,15 +1,24 @@
 <div class="row">
     <div class="col-xs-12">
         <h1 class="pull-left">
-            <i class="fa fa-lg fa-list"></i> <span>Formulario: {{response.title}}</span>
+            <i class="fa fa-lg fa-question-circle"></i> <span>{{response.title}}</span>
         </h1>
         <hr />
     </div>
 </div>
+<div class="row" ng-if="!response.readOnly" style="margin-bottom:10px">
+    <div class="col-xs-6">
+        <button class="btn btn-success pull-right" ng-click="save(response)">
+            <i class="fa fa-save"></i>
+            &nbsp;
+            Guardar
+        </button>
+    </div>
+</div>
 <div class="row">
-	<div class="col-xs-12">
-		<div ng-repeat="question in form.questions">
-			<question ng-model="question"></question>
+	<div class="col-xs-6">
+		<div ng-repeat="question in response.questions">
+			<question ng-model="question" read-only="response.readOnly"></question>
 		</div>
 	</div>
 </div>

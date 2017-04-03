@@ -1,0 +1,22 @@
+<div class="col-xs-12 panel panel-default">
+	<div class="panel-body">
+		<div class="form-group" ng-if="ngModel.type.id == 'text'">
+			<label for="text">{{ngModel.text}}</label>
+			<textarea class="form-control" rows="5" ng-model="ngModel.answer" id="text" ng-disabled="readOnly"></textarea>
+		</div>
+		<div class="checkbox" ng-if="ngModel.type.id == 'boolean'">
+			<label for="boolean">
+				<input type="checkbox" ng-model="ngModel.answer" id="boolean" ng-disabled="readOnly"/>{{ngModel.text}}
+			</label>
+		</div>
+		<div class="form-group" ng-if="ngModel.type.id == 'number'">
+			<label for="number">{{ngModel.text}}</label>
+			<input type="number" ng-model="ngModel.answer" id="number" ng-disabled="readOnly"/>
+		</div>
+		<div class="form-group" ng-if="ngModel.type.id == 'multiple'">
+			<label for="multiple">{{ngModel.text}}</label>
+			<select class="form-control" ng-model="ngModel.answer" id="multiple" ng-options="answer.text as answer.text for answer in ngModel.answers" ng-disabled="readOnly"></select>
+		</div>
+	</div>
+</div>
+		

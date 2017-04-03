@@ -91,7 +91,7 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
 				<label for="programType">Tipo de Programa</label>
-				<select class="form-control" ng-model="userData.programType" id="programType" ng-options="programType as programType.description for programType in programTypes track by programType._id"></select>
+				<select class="form-control" ng-model="userData.programType" id="programType" ng-options="programType as programType.description for programType in list.programTypes track by programType._id"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6" ng-if="userData.programType._id == 2">

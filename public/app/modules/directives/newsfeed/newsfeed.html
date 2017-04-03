@@ -13,4 +13,13 @@
 		<h3 ng-bind-html="ngModel.title"></h3>
 	</div>
 	<a class="newsfeed-link" ng-click="goTo(ngModel)" ng-if="['news','form'].indexOf(ngModel.cardType) != -1">Leer más</a>
+	<a class="newsfeed-link" ng-if="['event'].indexOf(ngModel.cardType) != -1">
+		<div class="col-xs-2">
+			¿Irás?
+		</div>
+		<div class="col-xs-10" style="padding-left: 30px;padding-top:3px;">
+			<button class="btn btn-sm btn-default" ng-class="{ active: ngModel.rsvp.indexOf(user._id) != -1 }" ng-click="saidYes()" >Sí</button>
+			<button class="btn btn-sm btn-default" ng-class="{ active: ngModel.rsvp.indexOf(user._id) == -1 }" ng-click="saidNo()">No</button>
+		</div>
+	</a>
 </div>

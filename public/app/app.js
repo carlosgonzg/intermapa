@@ -146,16 +146,17 @@ angular
 			}
 		}
 	})
-	.when('/response/:id?', {
+	.when('/responses', {
+		templateUrl : 'modules/form/views/responses.html',
+		controller : 'ResponsesCtrl'
+	})
+	.when('/response/:id', {
 		templateUrl : 'modules/form/views/response.html',
 		controller : 'ResponseCtrl',
 		resolve : {
-			response : function (Respond, $route) {
-				if ($route.current.params.id) {
-					return new News().findById(parseInt($route.current.params.id));
-				} else {
-					return new News();
-				}
+			response : function (Response, $route) {
+				var resp = new Response();
+				return resp.findById(parseInt($route.current.params.id));
 			}
 		}
 	})

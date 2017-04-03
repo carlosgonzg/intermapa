@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-xs-12 col-md-6">
 		<h1 class="pull-left">
 			<i class="fa fa-lg fa-user"></i> <span> Usuario</span>
 		</h1>
@@ -100,6 +100,12 @@
 			<div class="form-group">
 				<label for="role">Rol</label>
 				<select class="form-control" ng-model="user.role" id="role" ng-options="role as role.description for role in list.roles track by role._id"></select>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<div class="form-group">
+				<label for="task">Tarea</label>
+				<select class="form-control" ng-model="user.task" id="task" ng-options="task as task.description for task in list.tasks track by task._id" ng-if="[1,2,3].indexOf(user.role._id) != -1"></select>
 			</div>
 		</div>
 	</form>

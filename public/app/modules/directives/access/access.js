@@ -12,10 +12,12 @@ angular.module('IntermapaApp')
 			$scope.newAccess = {};
 			var types = {
 				'role': 'roles',
-				'periods': 'period',
+				'period': 'periods',
 				'participantType': 'participantTypes',
 				'programType': 'programTypes',
-				'country': 'countries'
+				'country': 'countries',
+				'task': 'tasks',
+				'program': 'programs'
 			};
 			$scope.addAccess = function(type, value){
 				var accessKey = type.toString();

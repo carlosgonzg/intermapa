@@ -14,7 +14,7 @@ module.exports = function (prefix, app) {
 		obj.crud.find({ _id: id}).then(util.success(res), util.error(res));
 	});
 	app.get(prefix, function (req, res) {
-		var obj = new News(app.db);
+		var obj = new News(app.db, req.user);
 		obj.getNewsfeed(req.user || {}).then(util.success(res), util.error(res));
 	});
 	require('./crud')(prefix, app, News);

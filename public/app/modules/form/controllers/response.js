@@ -2,13 +2,23 @@
 
 /**
  * @ngdoc function
- * @name IntermapaApp.controller:newsfeedCtrl
+ * @name IntermapaApp.controller:ResponseCtrl
  * @description
- * # AboutCtrl
+ * # ResponseCtrl
  * Controller of the IntermapaApp
  */
 angular.module('IntermapaApp')
-.controller('ResponseCtrl', function ($scope, news) {
-	$scope.news = news.data;
-	console.log($scope.news)
+.controller('ResponseCtrl', function ($scope, response, $location, toaster) {
+	$scope.response = response;
+
+	$scope.save = function () {
+		$scope.response.save()
+		.then(function (data) {
+			toaster.success('El formulario fue guardado de manera exitosa');
+			$location.path('/');
+		},
+			function (error) {
+			toaster.error('Error al guardar, favor intente mas tarde');
+		});
+	};
 });

@@ -3,7 +3,7 @@
 		<h1 class="pull-left">
 			<i class="fa fa-lg fa-user"></i> <span> Evento</span>
 		</h1>
-		<div class="btn-group pull-right" style="margin-top: 20px;" role="group" aria-label="...">
+		<div class="btn-group pull-right" style="margin-top: 20px;" role="group" aria-label="..." ng-if="[1,2].indexOf(userData.role._id) != -1">
 			<button type="submit" form="userForm" class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>&nbsp;<span>Guardar</span></button>
 			<back-button></back-button>
 		</div>
@@ -23,6 +23,18 @@
 				<label for="description">Título</label>
 				<textarea class="textarea form-control" ng-model="event.title" id="description"></textarea>
 			</div>
+		</div>
+		<div class="col-xs-12 col-md-12">
+			<div class="form-group">
+				<label>Participantes</label>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12">
+			<ul>
+				<li ng-repeat="rsvp in event.rsvp">
+					sup
+				</li>
+			</ul>
 		</div>
 	</form>
 </div>

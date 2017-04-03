@@ -3,7 +3,7 @@
 		<h1 class="pull-left">
 			<i class="fa fa-lg fa-user"></i> <span> Publicación</span>
 		</h1>
-		<div class="btn-group pull-right" style="margin-top: 20px;" role="group" aria-label="...">
+		<div class="btn-group pull-right" style="margin-top: 20px;" role="group" aria-label="..." ng-if="[1,2].indexOf(userData.role._id) != -1">
 			<button type="submit" form="userForm" class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>&nbsp;<span>Guardar</span></button>
 			<back-button></back-button>
 		</div>
@@ -11,7 +11,7 @@
 	</div>
 </div>
 <div class="row" ng-if="readOnly">
-	<div class="col-xs-12">
+	<div class="col-xs-12 col-md-6">
 		<div class="pull-right" style="margin-top: 20px;" role="group" aria-label="...">
 			<a href="#!/"><i class="fa fa-reply"></i>&nbsp;<span>Volver a publicaciones</span></a>
 		</div>
