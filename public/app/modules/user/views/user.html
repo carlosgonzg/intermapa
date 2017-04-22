@@ -50,14 +50,9 @@
 		</div>
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-				<label for="state">Estado de origen</label>
-				<select class="form-control" ng-model="user.entity.state" id="state" ng-options="state as state.description for state in statesByCountry(user.entity.country) track by state._id"></select>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-6">
-			<div class="form-group">
-				<label for="city">Ciudad de origen</label>
-				<select class="form-control" ng-model="user.entity.city" id="city" ng-options="city as city.description for city in citiesByState(user.entity.state) track by city._id"></select>
+				<label for="city" ng-if="user.participantType._id == 2">Ciudad de hospedaje</label>
+				<label for="city" ng-if="user.participantType._id != 2">Ciudad</label>
+				<select class="form-control" ng-model="user.entity.city" id="city" ng-options="city as city.description for city in list.cities track by city._id"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
@@ -81,7 +76,7 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
 				<label for="programType">Tipo de Programa</label>
-				<select class="form-control" ng-model="user.programType" id="programType" ng-options="programType as programType.description for programType in list.programTypes track by programType._id"></select>
+				<select class="form-control" ng-model="user.programType" id="programType" ng-options="programType as programType.description for programType in list.programTypes track by programType._id" ng-disabled="user.participantType._id == 1"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6" ng-if="user.programType._id == 2">

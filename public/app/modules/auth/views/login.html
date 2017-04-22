@@ -60,14 +60,8 @@
 		</div>
 		<div class="col-xs-12 col-md-6">
 			<div class="form-group">
-				<label for="state">Estado de origen</label>
-				<select class="form-control" ng-model="userData.entity.state" id="state" ng-options="state as state.description for state in statesByCountry(userData.entity.country) track by state._id"></select>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-6">
-			<div class="form-group">
-				<label for="city">Ciudad de origen</label>
-				<select class="form-control" ng-model="userData.entity.city" id="city" ng-options="city as city.description for city in citiesByState(userData.entity.state) track by city._id"></select>
+				<label for="city">Ciudad de hospedaje</label>
+				<select class="form-control" ng-model="userData.entity.city" id="city" ng-options="city as city.description for city in list.cities track by city._id"></select>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6">
